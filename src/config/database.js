@@ -15,12 +15,13 @@ const db = new sqlite3.Database(dbFile, (err) => {
 
 // Initialize products table if not exists
 const initSql = `
-CREATE TABLE IF NOT EXISTS products (
+CREATE TABLE IF NOT EXISTS pizzas (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   description TEXT,
   imageUrl TEXT,
   price REAL NOT NULL,
+  is_daily BOOLEAN NOT NULL DEFAULT 0,
   created_at TEXT DEFAULT (datetime('now')),
   updated_at TEXT DEFAULT (datetime('now'))
 );
@@ -31,6 +32,15 @@ db.serialize(() => {
         if (err) {
             console.error('Failed to initialize database', err);
             process.exit(1);
+        }
+    });
+
+    db.run(`
+    CREATE UNIQUE INDEX IF NOT EXISTS one_daily_pizza
+    ON pizzas (is_daily)
+    WHERE is_daily = 1`, (err) => {
+        if (err) {
+            console.error('Failed to create unique index', err);
         }
     });
 });

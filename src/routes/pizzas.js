@@ -1,13 +1,13 @@
-// routes/products.js
+// routes/pizzas.js
 const express = require('express');
 const { body, param } = require('express-validator');
-const productController = require('../controllers/productController');
+const pizzaController = require('../controllers/pizzaController');
 
 const router = express.Router();
 
 /**
  * @openapi
- * /api/products:
+ * /api/pizzas:
  *   get:
  *     summary: Retrieve a list of products
  *     responses:
@@ -24,6 +24,7 @@ const router = express.Router();
  *             required:
  *               - name
  *               - price
+ *               - is_daily
  *             properties:
  *               name:
  *                 type: string
@@ -33,16 +34,19 @@ const router = express.Router();
  *                 type: string
  *               price:
  *                 type: number
+ *               is_daily:
+ *                 type: boolean
+ *                 default: false
  *     responses:
  *       201:
- *         description: Product created
+ *         description: Pizza created
  *       400:
  *         description: Invalid input
  */
 
 /**
  * @openapi
- * /api/products/{id}:
+ * /api/pizzas/{id}:
  *   get:
  *     summary: Get a product by ID
  *     parameters:
@@ -79,6 +83,8 @@ const router = express.Router();
  *                 type: string
  *               price:
  *                 type: number
+ *               is_daily:
+ *                 type: boolean
  *     responses:
  *       200:
  *         description: Product updated
@@ -96,9 +102,9 @@ const router = express.Router();
  *           type: integer
  *     responses:
  *       204:
- *         description: Product deleted
+ *         description: Pizza deleted
  *       404:
- *         description: Product not found
+ *         description: Pizza not found
  */
 
 /**
@@ -109,12 +115,13 @@ const createAndUpdateValidations = [
     body('description').optional().isString(),
     body('imageUrl').optional().isString().isURL().withMessage('imageUrl must be a valid URL'),
     body('price').isFloat({ gt: 0 }).withMessage('price must be a positive number'),
+    body('is_daily').optional().isBoolean().withMessage('is_daily must be a boolean'),
 ];
 
-router.get('/', productController.findAll);
-router.post('/', createAndUpdateValidations, productController.create);
-router.get('/:id', [param('id').isInt().withMessage('id must be an integer')], productController.findOne);
-router.put('/:id', [param('id').isInt().withMessage('id must be an integer'), ...createAndUpdateValidations], productController.update);
-router.delete('/:id', [param('id').isInt().withMessage('id must be an integer')], productController.delete);
+router.get('/', pizzaController.findAll);
+router.post('/', createAndUpdateValidations, pizzaController.create);
+router.get('/:id', [param('id').isInt().withMessage('id must be an integer')], pizzaController.findOne);
+router.put('/:id', [param('id').isInt().withMessage('id must be an integer'), ...createAndUpdateValidations], pizzaController.update);
+router.delete('/:id', [param('id').isInt().withMessage('id must be an integer')], pizzaController.delete);
 
 module.exports = router;
