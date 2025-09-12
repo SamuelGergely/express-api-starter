@@ -1,13 +1,13 @@
-// routes/pizzas.js
+// Ingredient/routes/ingredients.js
 const express = require('express');
 const { body, param } = require('express-validator');
-const pizzaController = require('../controllers/pizzaController');
+const ingredientController = require('../controllers/ingredientController');
 
-const router = express.Router();
+const routerIngredient = express.Router();
 
 /**
  * @openapi
- * /api/pizzas:
+ * /api/ingredients:
  *   get:
  *     summary: Retrieve a list of products
  *     responses:
@@ -24,29 +24,21 @@ const router = express.Router();
  *             required:
  *               - name
  *               - price
- *               - is_daily
  *             properties:
  *               name:
  *                 type: string
- *               description:
- *                 type: string
- *               imageUrl:
- *                 type: string
  *               price:
  *                 type: number
- *               is_daily:
- *                 type: boolean
- *                 default: false
  *     responses:
  *       201:
- *         description: Pizza created
+ *         description: Ingredient created
  *       400:
  *         description: Invalid input
  */
 
 /**
  * @openapi
- * /api/pizzas/{id}:
+ * /api/ingredients/{id}:
  *   get:
  *     summary: Get a product by ID
  *     parameters:
@@ -77,17 +69,11 @@ const router = express.Router();
  *             properties:
  *               name:
  *                 type: string
- *               description:
- *                 type: string
- *               imageUrl:
- *                 type: string
  *               price:
  *                 type: number
- *               is_daily:
- *                 type: boolean
  *     responses:
  *       200:
- *         description: Product updated
+ *         description: Ingredient updated
  *       400:
  *         description: Invalid input
  *       404:
@@ -102,9 +88,9 @@ const router = express.Router();
  *           type: integer
  *     responses:
  *       204:
- *         description: Pizza deleted
+ *         description: Ingredient deleted
  *       404:
- *         description: Pizza not found
+ *         description: Ingredient not found
  */
 
 /**
@@ -112,16 +98,13 @@ const router = express.Router();
  */
 const createAndUpdateValidations = [
     body('name').isString().notEmpty().withMessage('name is required'),
-    body('description').optional().isString(),
-    body('imageUrl').optional().isString().isURL().withMessage('imageUrl must be a valid URL'),
     body('price').isFloat({ gt: 0 }).withMessage('price must be a positive number'),
-    body('is_daily').optional().isBoolean().withMessage('is_daily must be a boolean'),
 ];
 
-router.get('/', pizzaController.findAll);
-router.post('/', createAndUpdateValidations, pizzaController.create);
-router.get('/:id', [param('id').isInt().withMessage('id must be an integer')], pizzaController.findOne);
-router.put('/:id', [param('id').isInt().withMessage('id must be an integer'), ...createAndUpdateValidations], pizzaController.update);
-router.delete('/:id', [param('id').isInt().withMessage('id must be an integer')], pizzaController.delete);
+routerIngredient.get('/', ingredientController.findAll);
+routerIngredient.post('/', createAndUpdateValidations, ingredientController.create);
+routerIngredient.get('/:id', [param('id').isInt().withMessage('id must be an integer')], ingredientController.findOne);
+routerIngredient.put('/:id', [param('id').isInt().withMessage('id must be an integer'), ...createAndUpdateValidations], ingredientController.update);
+routerIngredient.delete('/:id', [param('id').isInt().withMessage('id must be an integer')], ingredientController.delete);
 
-module.exports = router;
+module.exports = routerIngredient;

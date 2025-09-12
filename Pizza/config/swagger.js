@@ -1,4 +1,4 @@
-// config/swagger.js
+// Pizza/config/swagger.js
 const swaggerJSDoc = require('swagger-jsdoc');
 
 const options = {
@@ -10,10 +10,10 @@ const options = {
             description: 'RESTful API for product management (SQLite, Express).'
         },
         servers: [
-            { url: 'http://localhost:3000', description: 'Local dev server' }
+            { url: 'http://localhost:4000', description: 'Local dev server' }
         ]
     },
-    apis: ['./src/routes/*.js', './src/controllers/*.js'] // pick up JSDoc in routes/controllers
+    apis: ['./Pizza/routes/*.js', './Pizza/controllers/*.js'] // pick up JSDoc in routes/controllers
 };
 
 const swaggerSpec = swaggerJSDoc(options);
