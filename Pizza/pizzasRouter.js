@@ -24,7 +24,6 @@ const routerPizza = express.Router();
  *             required:
  *               - name
  *               - price
- *               - is_daily
  *             properties:
  *               name:
  *                 type: string
@@ -34,9 +33,6 @@ const routerPizza = express.Router();
  *                 type: string
  *               price:
  *                 type: number
- *               is_daily:
- *                 type: boolean
- *                 default: false
  *     responses:
  *       201:
  *         description: Pizza created
@@ -83,8 +79,6 @@ const routerPizza = express.Router();
  *                 type: string
  *               price:
  *                 type: number
- *               is_daily:
- *                 type: boolean
  *     responses:
  *       200:
  *         description: Product updated

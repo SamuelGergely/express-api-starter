@@ -21,9 +21,6 @@ exports.create = async (req, res, next) => {
         // 201 Created
         return res.status(201).json(created);
     } catch (err) {
-        if (err.name === 'SequelizeUniqueConstraintError' || err.code === 'SQLITE_CONSTRAINT') {
-            return res.status(400).json({ errors: 'Only one pizza can be marked as daily at a time' });
-        }
         next(err);
     }
 };
@@ -69,9 +66,6 @@ exports.update = async (req, res, next) => {
 
         return res.status(200).json(updated);
     } catch (err) {
-        if (err.name === 'SequelizeUniqueConstraintError' || err.code === 'SQLITE_CONSTRAINT') {
-            return res.status(400).json({ errors: 'Only one pizza can be marked as daily at a time' });
-        }
         next(err);
     }
 };

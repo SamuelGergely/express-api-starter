@@ -37,6 +37,16 @@ CREATE TABLE IF NOT EXISTS ingredients (
 );
 `;
 
+const initPizzasIngredientsSql = `
+CREATE TABLE IF NOT EXISTS pizzas_ingredients (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    pizzasId INTEGER NOT NULL,
+    ingredientsId INTEGER NOT NULL,
+    FOREIGN KEY (pizzasId) REFERENCES pizzas(id),
+    FOREIGN KEY (ingredientsId) REFERENCES ingredients(id)
+);
+`;
+
 db.serialize(() => {
     db.run(initPizzaSql, (err) => {
         if (err) {
@@ -48,6 +58,13 @@ db.serialize(() => {
     db.run(initIngredientsSql, (err) => {
         if (err) {
             console.error('Failed to initialize Ingredients database', err);
+            process.exit(1);
+        }
+    });
+
+    db.run(initPizzasIngredientsSql, (err) => {
+        if (err) {
+            console.error('Failed to initialize PizzaIngredient database', err);
             process.exit(1);
         }
     })
