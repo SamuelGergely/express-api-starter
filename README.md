@@ -27,21 +27,11 @@ A simple RESTful API to manage products (CRUD) built with **Express**, **SQLite3
 │       class_diagram.puml
 │
 └───Pizza
-    │   app.js
-    │   server.js
-    │
-    ├───config
-    │       database.js
-    │       swagger.js
-    │
-    ├───controllers
-    │       pizzaController.js
-    │
-    ├───entities
-    │       Pizza.js
+    │pizzaController.js
+    │Pizza.js
     │
     └───routes
-            pizzas.js
+            pizzasRouter.js
             router.js
 ```
 
