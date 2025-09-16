@@ -2,8 +2,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const router = require('./routes/router');
-const swaggerPizzaUi = require('swagger-ui-express');
-const swaggerPizzaSpec = require('./config/swagger');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swagger');
 
 const app = express();
 
@@ -14,11 +14,11 @@ app.use(express.json());
 app.use('/api', router);
 
 // Swagger Ingredient UI
-app.use('/docs', swaggerPizzaUi.serve, swaggerPizzaUi.setup(swaggerPizzaSpec));
-app.get('/docs/pizza/swagger.json', (req, res) => {
+app.get('/docs/swagger.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-    res.send(swaggerPizzaSpec);
+    res.send(swaggerSpec);
 })
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // basic health-check
 app.get('/', (req, res) => res.json({ status: 'ok' }));
