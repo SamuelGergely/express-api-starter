@@ -27,8 +27,8 @@ app.use('/docs/pizzas', swaggerPizzaUi.serve, swaggerPizzaUi.setup(swaggerPizzaS
 app.get('/docs/pizzas/swagger.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerPizzaSpec);
-});
-*/
+});*/
+
 // basic health-check
 app.get('/', (req, res) => res.json({ status: 'ok' }));
 

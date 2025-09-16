@@ -115,7 +115,6 @@ const createAndUpdateValidations = [
     body('description').optional().isString(),
     body('imageUrl').optional().isString().isURL().withMessage('imageUrl must be a valid URL'),
     body('price').isFloat({ gt: 0 }).withMessage('price must be a positive number'),
-    body('is_daily').optional().isBoolean().withMessage('is_daily must be a boolean'),
 ];
 
 routerPizza.get('/', pizzaController.findAll);
