@@ -33,6 +33,10 @@ const routerPizza = express.Router();
  *                 type: string
  *               price:
  *                 type: number
+ *               ingredients:
+ *                  type: array
+ *                  items:
+ *                      type: integer
  *     responses:
  *       201:
  *         description: Pizza created
@@ -79,6 +83,10 @@ const routerPizza = express.Router();
  *                 type: string
  *               price:
  *                 type: number
+ *               ingredients:
+ *                  type: array
+ *                  items:
+ *                      type: integer
  *     responses:
  *       200:
  *         description: Product updated
@@ -116,5 +124,29 @@ routerPizza.post('/', createAndUpdateValidations, pizzaController.create);
 routerPizza.get('/:id', [param('id').isInt().withMessage('id must be an integer')], pizzaController.findOne);
 routerPizza.put('/:id', [param('id').isInt().withMessage('id must be an integer'), ...createAndUpdateValidations], pizzaController.update);
 routerPizza.delete('/:id', [param('id').isInt().withMessage('id must be an integer')], pizzaController.delete);
+
+routerPizza.post(
+    '/:id/ingredients/:ingredientId',
+    [
+      param('pizzaId').isInt().withMessage('pizzaId must be an integer'),
+      param('ingredientId').isInt().withMessage('ingredientId must be an integer')
+    ],
+    pizzaController.addIngredient);
+
+routerPizza.get(
+    '/:pizzaId/ingredients',
+    [
+        param('pizzaId').isInt().withMessage('pizzaId must be an integer')
+    ],
+    pizzaController.getIngredient
+);
+
+routerPizza.delete(
+    '/:id/ingredients/:ingredientId',
+    [
+        param('pizzaId').isInt().withMessage('pizzaId must be an integer'),
+        param('ingredientId').isInt().withMessage('ingredientId must be an integer')
+    ],
+    pizzaController.removeIngredient);
 
 module.exports = routerPizza;

@@ -37,13 +37,14 @@ CREATE TABLE IF NOT EXISTS ingredients (
 );
 `;
 
+// Initialize pizzas_ingredients table if not exists
 const initPizzasIngredientsSql = `
 CREATE TABLE IF NOT EXISTS pizzas_ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     pizzasId INTEGER NOT NULL,
     ingredientsId INTEGER NOT NULL,
-    FOREIGN KEY (pizzasId) REFERENCES pizzas(id),
-    FOREIGN KEY (ingredientsId) REFERENCES ingredients(id)
+    FOREIGN KEY (pizzasId) REFERENCES pizzas(id) ON DELETE CASCADE,
+    FOREIGN KEY (ingredientsId) REFERENCES ingredients(id) ON DELETE CASCADE
 );
 `;
 

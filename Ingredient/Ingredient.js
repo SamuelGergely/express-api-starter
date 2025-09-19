@@ -17,7 +17,7 @@ class Ingredient {
     }
 
     static findAll() {
-        const sql = `SELECT * FROM ingredients ORDER BY id DESC`;
+        const sql = `SELECT * FROM ingredients ORDER BY id ASC`;
         return new Promise((resolve, reject) => {
             db.all(sql, [], (err, rows) => {
                 if (err) return reject(err);

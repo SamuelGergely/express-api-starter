@@ -16,8 +16,8 @@ exports.create = async (req, res, next) => {
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { name, description, imageUrl, price } = req.body;
-        const created = await Pizza.create({ name, description, imageUrl, price });
+        const { name, description, imageUrl, price, ingredients } = req.body;
+        const created = await Pizza.create({ name, description, imageUrl, price, ingredients });
         // 201 Created
         return res.status(201).json(created);
     } catch (err) {
@@ -60,8 +60,8 @@ exports.update = async (req, res, next) => {
         const id = Number(req.params.id);
         if (Number.isNaN(id)) return res.status(400).json({ error: 'Invalid product id' });
 
-        const { name, description, imageUrl, price } = req.body;
-        const updated = await Pizza.update(id, { name, description, imageUrl, price });
+        const { name, description, imageUrl, price, ingredients } = req.body;
+        const updated = await Pizza.update(id, { name, description, imageUrl, price, ingredients });
         if (!updated) return res.status(404).json({ error: 'Product not found' }); // 404 Not Found
 
         return res.status(200).json(updated);
@@ -84,3 +84,49 @@ exports.delete = async (req, res, next) => {
         next(err);
     }
 };
+
+exports.addIngredient = async (req, res, next) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        const { pizzaId, ingredientId } = req.body;
+        const created = await Pizza.addIngredient( pizzaId, ingredientId );
+        return res.status(201).json(created);
+    } catch (err) {
+        next(err);
+    }
+}
+
+exports.getIngredient = async (req, res, next) => {
+    try {
+        const id = Number(req.params.id);
+        if (Number.isNaN(id)) return res.status(400).json({ error: 'Invalid ingredient id' });
+
+        const ingredient = await Pizza.getIngredient(id);
+        if (!ingredient) return res.status(404).json({ error: 'Product not found' });
+
+        return res.status(200).json(ingredient);
+    } catch (err) {
+        next(err);
+    }
+}
+
+exports.removeIngredient = async (req, res, next) => {
+    try {
+        const pizzaId = Number(req.params.id);
+        const ingredientId = Number(req.params.ingredientId);
+
+        if (Number.isNaN(pizzaId) || Number.isNaN(ingredientId)) {
+            return res.status(400).json({ error: 'Invalid ingredient id' });
+        }
+
+        const deleted = await Pizza.removeIngredient(pizzaId, ingredientId);
+        if (deleted === 0) return res.status(404).json({ error: 'Product not found' });
+
+        return res.status(204).send();
+    } catch (err) {
+        next(err);
+    }
+}

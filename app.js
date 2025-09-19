@@ -14,11 +14,11 @@ app.use(express.json());
 app.use('/api', router);
 
 // Swagger Ingredient UI
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.get('/docs/swagger.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
 })
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // basic health-check
 app.get('/', (req, res) => res.json({ status: 'ok' }));
