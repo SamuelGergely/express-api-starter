@@ -11,6 +11,16 @@ const db = new sqlite3.Database(dbFile, (err) => {
         process.exit(1);
     }
     console.log('Connected to sqlite database:', dbFile);
+
+    db.run('PRAGMA foreign_keys = ON');
+
+    db.get('PRAGMA foreign_keys;', (err, row) => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log("Foreign keys activées ?", row);
+        }
+    });
 });
 
 // Initialize Pizza table if not exists
