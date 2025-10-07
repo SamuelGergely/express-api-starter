@@ -9,12 +9,12 @@ const routerPizza = express.Router();
  * @openapi
  * /api/pizzas:
  *   get:
- *     summary: Retrieve a list of products
+ *     summary: Retrieve a list of pizzas
  *     responses:
  *       200:
- *         description: A list of products
+ *         description: A list of pizzas
  *   post:
- *     summary: Create a new product
+ *     summary: Create a new pizza
  *     requestBody:
  *       required: true
  *       content:
@@ -57,11 +57,11 @@ const routerPizza = express.Router();
  *           type: integer
  *     responses:
  *       200:
- *         description: A single product
+ *         description: A single pizza
  *       404:
- *         description: Product not found
+ *         description: Pizza not found
  *   put:
- *     summary: Update a product by ID
+ *     summary: Update a pizza by ID
  *     parameters:
  *       - in: path
  *         name: id
@@ -89,13 +89,13 @@ const routerPizza = express.Router();
  *                      type: integer
  *     responses:
  *       200:
- *         description: Product updated
+ *         description: Pizza updated
  *       400:
  *         description: Invalid input
  *       404:
- *         description: Product not found
+ *         description: Pizza not found
  *   delete:
- *     summary: Delete a product by ID
+ *     summary: Delete a pizza by ID
  *     parameters:
  *       - in: path
  *         name: id

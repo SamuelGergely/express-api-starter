@@ -9,12 +9,12 @@ const routerIngredient = express.Router();
  * @openapi
  * /api/ingredients:
  *   get:
- *     summary: Retrieve a list of products
+ *     summary: Retrieve a list of ingredients
  *     responses:
  *       200:
- *         description: A list of products
+ *         description: A list of ingredients
  *   post:
- *     summary: Create a new product
+ *     summary: Create a new ingredient
  *     requestBody:
  *       required: true
  *       content:
@@ -40,7 +40,7 @@ const routerIngredient = express.Router();
  * @openapi
  * /api/ingredients/{id}:
  *   get:
- *     summary: Get a product by ID
+ *     summary: Get an Ingredient by ID
  *     parameters:
  *       - in: path
  *         name: id
@@ -49,11 +49,11 @@ const routerIngredient = express.Router();
  *           type: integer
  *     responses:
  *       200:
- *         description: A single product
+ *         description: A single Ingredient
  *       404:
- *         description: Product not found
+ *         description: Ingredient not found
  *   put:
- *     summary: Update a product by ID
+ *     summary: Update an Ingredient by ID
  *     parameters:
  *       - in: path
  *         name: id
@@ -77,9 +77,9 @@ const routerIngredient = express.Router();
  *       400:
  *         description: Invalid input
  *       404:
- *         description: Product not found
+ *         description: Ingredient not found
  *   delete:
- *     summary: Delete a product by ID
+ *     summary: Delete an Ingredient by ID
  *     parameters:
  *       - in: path
  *         name: id
