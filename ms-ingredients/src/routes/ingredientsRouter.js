@@ -1,7 +1,7 @@
 // routes/routes/ingredientsRouter.js
-const express = require('express');
-const { body, param } = require('express-validator');
-const ingredientController = require('../controllers/ingredientController');
+const express = require("express");
+const { body, param } = require("express-validator");
+const ingredientController = require("../controllers/ingredientController");
 
 const routerIngredient = express.Router();
 
@@ -97,14 +97,35 @@ const routerIngredient = express.Router();
  * Validation rules
  */
 const createAndUpdateValidations = [
-    body('name').isString().notEmpty().withMessage('name is required'),
-    body('price').isFloat({ gt: 0 }).withMessage('price must be a positive number'),
+  body("name").isString().notEmpty().withMessage("name is required"),
+  body("price")
+    .isFloat({ gt: 0 })
+    .withMessage("price must be a positive number"),
 ];
 
-routerIngredient.get('/', ingredientController.findAll);
-routerIngredient.post('/', createAndUpdateValidations, ingredientController.create);
-routerIngredient.get('/:id', [param('id').isInt().withMessage('id must be an integer')], ingredientController.findOne);
-routerIngredient.put('/:id', [param('id').isInt().withMessage('id must be an integer'), ...createAndUpdateValidations], ingredientController.update);
-routerIngredient.delete('/:id', [param('id').isInt().withMessage('id must be an integer')], ingredientController.delete);
+routerIngredient.get("/", ingredientController.findAll);
+routerIngredient.post(
+  "/",
+  createAndUpdateValidations,
+  ingredientController.create,
+);
+routerIngredient.get(
+  "/:id",
+  [param("id").isInt().withMessage("id must be an integer")],
+  ingredientController.findOne,
+);
+routerIngredient.put(
+  "/:id",
+  [
+    param("id").isInt().withMessage("id must be an integer"),
+    ...createAndUpdateValidations,
+  ],
+  ingredientController.update,
+);
+routerIngredient.delete(
+  "/:id",
+  [param("id").isInt().withMessage("id must be an integer")],
+  ingredientController.delete,
+);
 
 module.exports = routerIngredient;

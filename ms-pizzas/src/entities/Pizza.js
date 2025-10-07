@@ -3,7 +3,18 @@ const db = require('../config/database');
 
 class Pizza {
     static create({ name, description, imageUrl, price, ingredients = [] }) {
+        const sql = `INSERT INTO pizzas (name, description, imageUrl, price, ingredients, created_at, updated_at)
+                 VALUES (?, ?, ?, ?, ?, datetime('now'), datetime('now'))`;
+        const params = [name, description || null, imageUrl || null, price, JSON.stringify(ingredients)];
+
         return new Promise((resolve, reject) => {
+            db.run(sql, params, function (err) {
+                if (err) return reject(err);
+                // fetch created row
+                Pizza.findById(this.lastID).then(resolve).catch(reject);
+            });
+        });
+        /*return new Promise((resolve, reject) => {
             if (ingredients.length > 0) {
                 const placeholders = ingredients.map(() => '?').join(',');
                 db.all(`SELECT id FROM ingredients WHERE id IN (${placeholders})`, ingredients, (err, rows) => {
@@ -52,22 +63,23 @@ class Pizza {
                         .catch(reject);
                 });
             }
-        });
+        });*/
     }
 
     static findAll() {
         const sqlPizzas = `SELECT * FROM pizzas ORDER BY id ASC`;
-        const sqlIngredients = `
+        /*const sqlIngredients = `
         SELECT i.id, i.name
         FROM ingredients i
         JOIN pizzas_ingredients pi ON i.id = pi.ingredientsId
         WHERE pi.pizzasId = ?
-        `;
+        `;*/
 
         return new Promise((resolve, reject) => {
             db.all(sqlPizzas, [], (err, pizzas) => {
                 if (err) return reject(err);
-                if (!pizzas || pizzas.length === 0) return resolve([]);
+                resolve(pizzas);
+                /*if (!pizzas || pizzas.length === 0) return resolve([]);
 
                 const promises = pizzas.map(pizza => {
                     return new Promise((resolve, reject) => {
@@ -81,30 +93,31 @@ class Pizza {
 
                 Promise.all(promises)
                     .then(resolve)
-                    .catch(reject);
+                    .catch(reject);*/
             });
         });
     }
 
     static findById(id) {
         const sqlPizza = `SELECT * FROM pizzas WHERE id = ?`;
-        const sqlIngredients = `
+        /*const sqlIngredients = `
             SELECT i.id, i.name
             FROM ingredients i
             JOIN pizzas_ingredients pi ON i.id = pi.ingredientsId
             WHERE pi.pizzasId = ?
-        `;
+        `;*/
 
         return new Promise((resolve, reject) => {
             db.get(sqlPizza, [id], (err, pizza) => {
                 if (err) return reject(err);
-                if (!pizza) return resolve(null);
+                resolve(pizza || null);
+                /*if (!pizza) return resolve(null);
 
                 db.all(sqlIngredients, [id], (err, ingredients) => {
                     if (err) return reject(err);
                     pizza.ingredients = ingredients;
                     resolve(pizza);
-                })
+                })*/
             });
         });
     }
@@ -116,17 +129,19 @@ class Pizza {
                 description = COALESCE(?, description),
                 imageUrl = COALESCE(?, imageUrl),
                 price = COALESCE(?, price),
+                ingredients = COALESCE(?, ingredients),
                 updated_at = datetime('now')
             WHERE id = ?
         `;
-        const params = [name, description, imageUrl, price, id];
+        const params = [name, description, imageUrl, price, ingredients, id];
 
         return new Promise((resolve, reject) => {
             db.run(sql, params, function (err) {
                 if (err) return reject(err);
                 if (this.changes === 0) return resolve(null); // pizza non trouvée
+                Pizza.findById(id).then(resolve).catch(reject);
 
-                if (!Array.isArray(ingredients)) {
+                /*if (!Array.isArray(ingredients)) {
                     return Pizza.findById(id).then(resolve).catch(reject);
                 }
 
@@ -172,7 +187,7 @@ class Pizza {
                     });
                 };
 
-                handleIngredients();
+                handleIngredients();*/
             });
         });
     }
@@ -187,6 +202,7 @@ class Pizza {
         });
     }
 
+    /*
     static addIngredient(pizzaId, ingredientId) {
         const sql = `INSERT OR IGNORE INTO pizzas_ingredients (pizzasID, ingredientsId) VALUES (?, ?)`;
         return new Promise((resolve, reject) => {
@@ -220,7 +236,7 @@ class Pizza {
                 resolve(this.changes);
             });
         });
-    }
+    }*/
 }
 
 module.exports = Pizza;

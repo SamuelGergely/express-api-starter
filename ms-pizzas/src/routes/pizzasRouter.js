@@ -117,6 +117,7 @@ const createAndUpdateValidations = [
     body('description').optional().isString(),
     body('imageUrl').optional().isString().isURL().withMessage('imageUrl must be a valid URL'),
     body('price').isFloat({ gt: 0 }).withMessage('price must be a positive number'),
+    body('ingredients').isArray().withMessage('ingredients must be an array'),
 ];
 
 routerPizza.get('/', pizzaController.findAll);
@@ -125,6 +126,7 @@ routerPizza.get('/:id', [param('id').isInt().withMessage('id must be an integer'
 routerPizza.put('/:id', [param('id').isInt().withMessage('id must be an integer'), ...createAndUpdateValidations], pizzaController.update);
 routerPizza.delete('/:id', [param('id').isInt().withMessage('id must be an integer')], pizzaController.delete);
 
+/*
 routerPizza.post(
     '/:id/ingredients/:ingredientId',
     [
@@ -147,6 +149,6 @@ routerPizza.delete(
         param('pizzaId').isInt().withMessage('pizzaId must be an integer'),
         param('ingredientId').isInt().withMessage('ingredientId must be an integer')
     ],
-    pizzaController.removeIngredient);
+    pizzaController.removeIngredient);*/
 
 module.exports = routerPizza;

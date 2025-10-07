@@ -1,9 +1,9 @@
 // app.js
 const express = require('express');
 const morgan = require('morgan');
-const router = require('./routes/router');
+const router = require('../../../express-api-starter/ms-pizzas/src/routes/router.js');
 const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./ms-pizzas/src/config/swagger');
+const swaggerSpec = require('../../../express-api-starter/ms-pizzas/src/config/swagger');
 
 const app = express();
 

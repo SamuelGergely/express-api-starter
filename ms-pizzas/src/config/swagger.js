@@ -16,9 +16,7 @@ const options = {
     },
     apis: [
         path.join(__dirname,'../routes/pizzasRouter.js'),
-        path.join(__dirname,'../routes/pizzaController.js'),
-        path.join(__dirname, '../routes/ingredientsRouter.js'),
-        path.join(__dirname,'../routes/ingredientController.js')
+        path.join(__dirname,'../controllers/pizzasController.js'),
     ] // pick up JSDoc in routes/controllers
 };
 

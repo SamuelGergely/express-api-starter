@@ -9,7 +9,7 @@ A simple RESTful API to manage products (CRUD) built with **Express**, **SQLite3
 - **Node.js**: v18.x or higher
 - **npm**: v9.x or higher
 
-*(older versions may work but are not tested)*
+_(older versions may work but are not tested)_
 
 ---
 
@@ -72,4 +72,3 @@ PORT=3000
 DB_FILE=./dev.sqlite
 NODE_ENV=development
 ```
-
