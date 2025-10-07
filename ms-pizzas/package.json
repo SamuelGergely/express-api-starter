@@ -2,10 +2,10 @@
   "name": "products-api",
   "version": "1.0.0",
   "description": "RESTful Products API with sqlite3, express-validator, and swagger-ui",
-  "main": "server.js",
+  "main": "ms-ingredients/src/server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node ms-ingredients/src/server.js",
+    "dev": "nodemon ms-ingredients/src/server.js",
     "test": "jest --coverage"
   },
   "keywords": [],

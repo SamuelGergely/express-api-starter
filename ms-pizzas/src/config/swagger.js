@@ -1,4 +1,4 @@
-// Pizza/config/swagger.js
+// routes/config/swagger.js
 const swaggerJSDoc = require('swagger-jsdoc');
 const path = require('path');
 
@@ -15,10 +15,10 @@ const options = {
         ]
     },
     apis: [
-        path.join(__dirname,'../Pizza/pizzasRouter.js'),
-        path.join(__dirname,'../Pizza/pizzaController.js'),
-        path.join(__dirname, '../Ingredient/ingredientsRouter.js'),
-        path.join(__dirname,'../Ingredient/ingredientController.js')
+        path.join(__dirname,'../routes/pizzasRouter.js'),
+        path.join(__dirname,'../routes/pizzaController.js'),
+        path.join(__dirname, '../routes/ingredientsRouter.js'),
+        path.join(__dirname,'../routes/ingredientController.js')
     ] // pick up JSDoc in routes/controllers
 };
 

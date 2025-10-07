@@ -1,4 +1,4 @@
-// Pizza/config/database.js
+// routes/config/database.js
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 require('dotenv').config();
@@ -23,7 +23,7 @@ const db = new sqlite3.Database(dbFile, (err) => {
     });
 });
 
-// Initialize Pizza table if not exists
+// Initialize routes table if not exists
 const initPizzaSql = `
 CREATE TABLE IF NOT EXISTS pizzas (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS pizzas_ingredients (
 db.serialize(() => {
     db.run(initPizzaSql, (err) => {
         if (err) {
-            console.error('Failed to initialize Pizza database', err);
+            console.error('Failed to initialize routes database', err);
             process.exit(1);
         }
     });

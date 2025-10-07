@@ -1,4 +1,4 @@
-// Pizza/entities/Pizza.js
+// routes/entities/routes.js
 const db = require('../config/database');
 
 class Pizza {

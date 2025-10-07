@@ -1,7 +1,7 @@
-// Pizza/routes/pizzasRouter.js
+// routes/routes/pizzasRouter.js
 const express = require('express');
 const { body, param } = require('express-validator');
-const pizzaController = require('./pizzaController');
+const pizzaController = require('../controllers/pizzaController');
 
 const routerPizza = express.Router();
 
@@ -39,7 +39,7 @@ const routerPizza = express.Router();
  *                      type: integer
  *     responses:
  *       201:
- *         description: Pizza created
+ *         description: routes created
  *       400:
  *         description: Invalid input
  */
@@ -59,7 +59,7 @@ const routerPizza = express.Router();
  *       200:
  *         description: A single pizza
  *       404:
- *         description: Pizza not found
+ *         description: routes not found
  *   put:
  *     summary: Update a pizza by ID
  *     parameters:
@@ -89,11 +89,11 @@ const routerPizza = express.Router();
  *                      type: integer
  *     responses:
  *       200:
- *         description: Pizza updated
+ *         description: routes updated
  *       400:
  *         description: Invalid input
  *       404:
- *         description: Pizza not found
+ *         description: routes not found
  *   delete:
  *     summary: Delete a pizza by ID
  *     parameters:
@@ -104,9 +104,9 @@ const routerPizza = express.Router();
  *           type: integer
  *     responses:
  *       204:
- *         description: Pizza deleted
+ *         description: routes deleted
  *       404:
- *         description: Pizza not found
+ *         description: routes not found
  */
 
 /**

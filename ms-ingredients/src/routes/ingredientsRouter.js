@@ -1,7 +1,7 @@
-// Ingredient/routes/ingredientsRouter.js
+// routes/routes/ingredientsRouter.js
 const express = require('express');
 const { body, param } = require('express-validator');
-const ingredientController = require('./ingredientController');
+const ingredientController = require('../controllers/ingredientController');
 
 const routerIngredient = express.Router();
 
@@ -31,7 +31,7 @@ const routerIngredient = express.Router();
  *                 type: number
  *     responses:
  *       201:
- *         description: Ingredient created
+ *         description: routes created
  *       400:
  *         description: Invalid input
  */
@@ -40,7 +40,7 @@ const routerIngredient = express.Router();
  * @openapi
  * /api/ingredients/{id}:
  *   get:
- *     summary: Get an Ingredient by ID
+ *     summary: Get an routes by ID
  *     parameters:
  *       - in: path
  *         name: id
@@ -49,11 +49,11 @@ const routerIngredient = express.Router();
  *           type: integer
  *     responses:
  *       200:
- *         description: A single Ingredient
+ *         description: A single routes
  *       404:
- *         description: Ingredient not found
+ *         description: routes not found
  *   put:
- *     summary: Update an Ingredient by ID
+ *     summary: Update an routes by ID
  *     parameters:
  *       - in: path
  *         name: id
@@ -73,13 +73,13 @@ const routerIngredient = express.Router();
  *                 type: number
  *     responses:
  *       200:
- *         description: Ingredient updated
+ *         description: routes updated
  *       400:
  *         description: Invalid input
  *       404:
- *         description: Ingredient not found
+ *         description: routes not found
  *   delete:
- *     summary: Delete an Ingredient by ID
+ *     summary: Delete an routes by ID
  *     parameters:
  *       - in: path
  *         name: id
@@ -88,9 +88,9 @@ const routerIngredient = express.Router();
  *           type: integer
  *     responses:
  *       204:
- *         description: Ingredient deleted
+ *         description: routes deleted
  *       404:
- *         description: Ingredient not found
+ *         description: routes not found
  */
 
 /**

@@ -3,7 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const router = require('./routes/router');
 const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./config/swagger');
+const swaggerSpec = require('./ms-pizzas/src/config/swagger');
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(express.json());
 // API routes
 app.use('/api', router);
 
-// Swagger Ingredient UI
+// Swagger routes UI
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.get('/docs/swagger.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');

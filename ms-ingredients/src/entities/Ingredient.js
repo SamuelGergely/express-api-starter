@@ -1,5 +1,5 @@
-// Ingredient/entities/ingredient.js
-const db = require('../config/database');
+// routes/entities/ingredient.js
+const db = require('../../../ms-pizzas/src/config/database');
 
 class Ingredient {
     static create({ name, price }) {
